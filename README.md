@@ -10,7 +10,7 @@ PassGuard is an open-source password manager designed for desktop platforms and 
 
 ## Supported Platforms
 
-- **Desktop**: Windows, macOS (currently unsupported), Linux (currently unsupported)
+- **Desktop**: Windows, macOS (currently unsupported), Linux (work in progress)
 - **Android**: Coming soon...
 
 ## Usage
