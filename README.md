@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="app-icon.png" alt="passguard-logo" />
+</p>
+
 # PassGuard
 
 PassGuard is an open-source password manager designed for desktop platforms and Android devices. It utilizes Tauri and SvelteKit for desktop applications and Jetpack Compose for Android development.
