@@ -1,0 +1,26 @@
+# LINK https://github.com/ivangabriele/docker-tauri
+# The base image has following things already installed: rust, node, yarn, tauri
+FROM ivangabriele/tauri:debian-bookworm-18
+
+# Just in case if anyone the pre-requisites are missing
+# LINK https://beta.tauri.app/guides/prerequisites#linux
+RUN apt install -y libwebkit2gtk-4.1-dev \
+  build-essential \
+  curl \
+  wget \
+  file \
+  libssl-dev \
+  libayatana-appindicator3-dev \
+  librsvg2-dev
+
+# setting CWD
+WORKDIR /app
+
+# copying context files
+COPY . .
+
+# installting dependencies
+RUN yarn install
+
+# running build command
+CMD yarn exec tauri build

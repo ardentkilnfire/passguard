@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  build-desktop:
+    container_name: passguard-build-desktop
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Attaching bundle directory from container to host machine
+      - ./build-tauri:/app/src-tauri/target/release/bundle
