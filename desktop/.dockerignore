@@ -4,3 +4,4 @@ node_modules
 .svelte-kit
 build
 build-tauri
+.xwin-cache
