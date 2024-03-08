@@ -1,12 +1,9 @@
-# For Windows build stage
-FROM debian:bookworm
+# Define the base image for the Linux environment
+FROM debian:bookworm as linux-base
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    # Add your dependencies here
-    javascriptcoregtk-4.1 \
-    libsoup-3.0 \
-    webkit2gtk-4.1 \
+# Install dependencies required by tauri (https://beta.tauri.app/guides/prerequisites#linux)
+RUN apt update && apt install -y \
+    libwebkit2gtk-4.1-dev \
     build-essential \
     curl \
     wget \
@@ -14,37 +11,41 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libayatana-appindicator3-dev \
     librsvg2-dev \
-    # to buil executable (exe) for windows 
+    # Dependecies required for building windows executable (exe) 
     nsis \
     lld \
     llvm
 
+# Install Node.js version 20
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt install -y nodejs
+
+# Install pnpm globally (a fast package manager for Node.js projects)
+RUN npm install -g pnpm
+
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# Set PATH to include Cargo
+# Set PATH to include Cargo (Rust's package manager)
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install the Windows Rust target
+# Install the Windows Rust target 
+# Refer to https://tauri.app/v1/guides/building/cross-platform/#experimental-build-windows-apps-on-linux-and-macos to learn more
 RUN rustup target add x86_64-pc-windows-msvc
 
-# To get the Windows SDKs required by the msvc target we will use the xwin project
-RUN cargo install xwin
-RUN xwin --accept-license splat --output /xwin
+# To get the Windows SDKs required by the MSVC target, we use the xwin project
+# Install the xwin tool (https://github.com/Jake-Shadle/xwin)
+RUN cargo install xwin \
+    && xwin --accept-license splat --output /xwin
 
-# Install Node.js version 20
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get install -y nodejs
-
-# Set working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy application code
+# Copy the application code into the container
 COPY . .
 
-# Install dependencies
-RUN npm install -g pnpm
+# Install dependencies using pnpm
 RUN pnpm install
 
-# Build for Windows
-CMD pnpm exec tauri build && pnpm exec tauri build --target x86_64-pc-windows-msvc && cp -r /app/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis /app/src-tauri/target/release/bundle
+# Build for linux and windows
+CMD pnpm exec tauri build && pnpm tauri build --target x86_64-pc-windows-msvc && cp -r /app/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis /app/src-tauri/target/release/bundle

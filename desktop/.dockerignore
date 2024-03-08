@@ -3,5 +3,5 @@ src-tauri/gen/schemas
 node_modules
 .svelte-kit
 build
-build-tauri
+dist
 .xwin-cache
