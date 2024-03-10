@@ -1,5 +1,5 @@
 # Define the base image for the Linux environment
-FROM debian:bookworm as linux-base
+FROM debian:bookworm
 
 # Install dependencies required by tauri (https://beta.tauri.app/guides/prerequisites#linux)
 RUN apt update && apt install -y \
@@ -47,5 +47,9 @@ COPY . .
 # Install dependencies using pnpm
 RUN pnpm install
 
-# Build for linux and windows
-CMD pnpm exec tauri build && pnpm tauri build --target x86_64-pc-windows-msvc && cp -r /app/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis /app/src-tauri/target/release/bundle
+# Build for linux
+CMD pnpm exec tauri build \
+    # build for windows
+    && pnpm tauri build --target x86_64-pc-windows-msvc \
+    # copy windows build files to mounted directory
+    && cp -r /app/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis /app/src-tauri/target/release/bundle
