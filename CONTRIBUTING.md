@@ -22,5 +22,27 @@ To set up the PassGuard project on your local machine, follow these steps:
 2. **Install Project Dependencies**: PassGuard uses `pnpm` for managing dependencies. Run `pnpm i` to install all necessary dependencies.
 3. **Run the Project**: Start the PassGuard project in development mode or locally by running `pnpm tauri dev`.
 
+## Building for Desktop
+
+To generate desktop application binaries for PassGuard, the following steps use Docker to streamline the build process. Follow these instructions:
+
+1. Navigate to the `desktop` directory in your PassGuard project.
+
+2. Run the following command in your terminal:
+
+   ```bash
+   docker-compose -f docker-compose.build.yml up
+   ```
+
+   This command triggers the build process for the application binaries.
+
+3. Once the build is completed, check the `dist` directory within the `desktop` directory. You will find the following sub-directories:
+
+   - `appimage`: Contains the AppImage format for Linux distributions.
+   - `deb`: Holds the Debian package for Debian-based Linux distributions.
+   - `rpm`: Contains the RPM package for Red Hat-based Linux distributions.
+   - `nsis`: Holds the NSIS installer for Windows.
+
+Please note that PassGuard currently supports Windows and Linux platforms.
 
 ### Thank you for your contributions!
