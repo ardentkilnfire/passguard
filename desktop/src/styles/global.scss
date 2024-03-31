@@ -1,0 +1,12 @@
+:root {
+    --bg: #191B2E;
+}
+
+* {
+    font-family: "Inter";
+    color: white;
+}
+
+body,html {
+    background-color: var(--bg);
+}
