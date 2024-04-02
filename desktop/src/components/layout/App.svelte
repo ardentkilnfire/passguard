@@ -1,11 +1,11 @@
 <div id="app">
-  <slot />
+	<slot />
 </div>
 
 <style>
-  #app {
-    height: calc(100vh - var(--titlebar-height));
-    width: 100vw;
-    display: flex;
-  }
+	#app {
+		height: calc(100vh - var(--titlebar-height));
+		width: 100vw;
+		display: flex;
+	}
 </style>
