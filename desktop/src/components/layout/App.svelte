@@ -3,7 +3,9 @@
 </script>
 
 <div id="app">
-	<slot />
+	<!-- Sidebar -->
+	<Sidebar />
+
 	<!-- Content Area -->
 	<main>
 		<slot />
