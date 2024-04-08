@@ -3,22 +3,19 @@
 	import { Routes } from '$lib/config';
 </script>
 
-<!-- TODO: Implement actual Onboarding page -->
 <button
 	on:click={() => {
-		// TODO: Implement actual onboarding system
-		alert('Implementation Pending');
-
+		alert('Not implemented yet');
 		// Temporary bypass
-		goto(Routes.LOGIN);
+		goto(Routes.APP_ROOT);
 	}}
 >
-	Continue
+	Open Login Dialogue
 </button>
 
 <style>
 	button {
-		background-color: var(--primary);
+		background-color: rgba(var(--primary-rgb), 0.2);
 		padding: var(--spacing-8) var(--spacing-16);
 		border-radius: var(--rounded-4);
 		position: absolute;
@@ -26,7 +23,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		font-weight: 600;
-		color: var(--bg);
+		color: rgba(var(--primary-rgb), 0.5);
 		box-shadow: var(--shadow-sm);
 	}
 </style>

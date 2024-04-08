@@ -1,10 +1,10 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+name = "passgaurd"
+version = "0.0.1"
+description = "Simple offline password manager with some extra features"
+authors = ["Anil Kumar <akt01.social@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/ardentkilnfire/passguard"
 edition = "2021"
 rust-version = "1.70"
 
