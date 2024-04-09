@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div class="container">
+<form on:submit|preventDefault={() => verifyKeyWithBackend(SECRET_KEY)} class="container">
 	<div class="title">
 		<p>Login</p>
 		<div class="divider" />
@@ -42,8 +42,8 @@
 		bind:value={SECRET_KEY}
 	/>
 
-	<button on:click={() => verifyKeyWithBackend(SECRET_KEY)}>Login</button>
-</div>
+	<button type="submit">Login</button>
+</form>
 
 <style>
 	.container {
