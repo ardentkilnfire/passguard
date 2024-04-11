@@ -30,30 +30,30 @@
 	<div class="spacer" />
 
 	<!-- Profile Button -->
-	<a
-		href={Routes.APP_PROFILE}
+	<button
+	on:mousedown={() => goto(Routes.APP_PROFILE)}
 		class="nav-item profile-btn bounce-effect {containsPath($page.route.id, Routes.APP_PROFILE)
 			? 'active'
 			: ''}"
 	>
 		<!-- TODO: Setup tooltips to show name -->
 		<img src="https://api.dicebear.com/8.x/adventurer/svg?seed=Angel" alt="Profile Avatar" />
-	</a>
+	</button>
 
 	<!-- Settings Button -->
-	<a
-		href={Routes.APP_SETTINGS}
+	<button
+	on:mousedown={() => goto(Routes.APP_SETTINGS)}
 		class="nav-item bounce-effect {containsPath($page.route.id, Routes.APP_SETTINGS)
 			? 'active'
 			: ''}"
 	>
 		<!-- TODO: Setup tooltips to show name -->
 		<Gear weight={containsPath($page.route.id, Routes.APP_SETTINGS) ? 'fill' : 'regular'} />
-	</a>
+	</button>
 
 	<!-- App lock button -->
 	<button
-		on:click={() => {
+		on:mousedown={() => {
 			// Todo: Implement complete logout system
 			goto(Routes.LOGIN);
 		}}
@@ -66,7 +66,7 @@
 
 <style>
 	.sidebar {
-		width: 8rem;
+		width: var(--sidebar-size);
 		border-right: 1px solid var(--border);
 		flex-shrink: 0;
 		background-color: rgba(255, 255, 255, 0.05);
