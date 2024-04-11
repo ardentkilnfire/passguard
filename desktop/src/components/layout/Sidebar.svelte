@@ -18,12 +18,12 @@
 	{#each navItems as { name, path, Icon } (path)}
 		<!-- TODO: Setup tooltips to show name -->
 
-		<a
-			href={path}
+		<button
+			on:mousedown={() => goto(path)}
 			class="nav-item bounce-effect {containsPath($page.route.id, path) ? 'active' : ''}"
 		>
 			<Icon weight={containsPath($page.route.id, path) ? 'fill' : 'regular'} />
-		</a>
+		</button>
 	{/each}
 
 	<!-- Flexible Spacer -->
