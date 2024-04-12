@@ -5,6 +5,6 @@
 </script>
 
 <Titlebar />
-<IconContext values={{ weight: 'regular', size: 24, class: 'icon' }}>
+<IconContext values={{ weight: 'bold', size: 24, class: 'icon' }}>
 	<slot />
 </IconContext>
