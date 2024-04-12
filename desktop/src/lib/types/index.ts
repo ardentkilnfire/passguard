@@ -5,3 +5,10 @@ export type NavItem = {
 	path: string;
 	Icon: typeof Vault;
 };
+
+export interface VaultItem {
+	id: string
+	name: string
+	url: string
+	tag?: string
+}
