@@ -1,6 +1,7 @@
 :root {
 	--titlebar-height: 3.2rem;
 	--sidebar-size: 8rem;
+	--items-panel-size: 30rem;
 
 	/* Font */
 	--font-sans: 'Inter', sans-serif;
@@ -81,4 +82,15 @@ body {
 .bounce-effect:active {
 	animation: bounceOnClick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 	transform-origin: center;
+}
+
+.divider {
+	height: 1px;
+	background-color: rgba(255, 255, 255, 0.05);
+	flex-shrink: 0;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
 }

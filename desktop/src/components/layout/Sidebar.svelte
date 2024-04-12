@@ -14,7 +14,7 @@
 	];
 </script>
 
-<nav class="sidebar">
+<nav class="sidebar flex-column">
 	{#each navItems as { name, path, Icon } (path)}
 		<!-- TODO: Setup tooltips to show name -->
 
@@ -70,8 +70,6 @@
 		border-right: 1px solid var(--border);
 		flex-shrink: 0;
 		background-color: rgba(255, 255, 255, 0.05);
-		display: flex;
-		flex-direction: column;
 		align-items: center;
 		padding: var(--spacing-24) var(--spacing-16);
 		gap: var(--spacing-16);
