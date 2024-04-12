@@ -48,8 +48,7 @@
 <style>
 	.container {
 		display: flex;
-		width: 62rem;
-		max-width: 62rem;
+		width: 75%;
 		flex-direction: column;
 		background-color: rgba(255, 255, 255, 0.05);
 		border-radius: var(--rounded-4);
@@ -65,11 +64,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
-	}
-
-	.divider {
-		height: 1px;
-		background-color: rgba(255, 255, 255, 0.05);
 	}
 
 	.container > input {
