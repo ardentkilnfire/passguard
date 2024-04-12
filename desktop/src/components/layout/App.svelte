@@ -21,6 +21,7 @@
 
 	main {
 		flex-shrink: 0;
-		width: 100%;
+		width: calc(100% - var(--sidebar-size));
+		display: flex;
 	}
 </style>
