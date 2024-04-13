@@ -2,6 +2,10 @@
 	import { MagnifyingGlass } from 'phosphor-svelte';
 
 	export let title: string;
+
+	// importer can bind this value to listen changes in search term
+	export let searchTerm: string = "";
+
 </script>
 
 <section class="items-panel flex-column">
@@ -16,7 +20,7 @@
 		<!-- TODO: Implement Search Logic -->
 		<div class="searchbar">
 			<MagnifyingGlass size="16" />
-			<input type="text" placeholder="Search by name or tag . . ." />
+			<input bind:value={searchTerm} type="text" placeholder="Search by name or tag . . ." />
 		</div>
 	</section>
 

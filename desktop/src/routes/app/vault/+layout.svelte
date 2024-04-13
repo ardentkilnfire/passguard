@@ -4,16 +4,41 @@
 	import ItemsPanel from '$components/layout/ItemsPanel.svelte';
 	import { Routes } from '$lib/config';
 	import { fetchFaviconFromURL } from '$lib/utils';
+	import { writable } from 'svelte/store';
+	import type { PageData } from './$types';
 
-	const { vaultItems } = $page.data;
+	const { vaultItems } = $page.data as PageData;
+
+	let filteredVaultItems = vaultItems;
+
+	let searchTerm = writable("");
+
+	// when search term changes
+	searchTerm.subscribe(()=>{
+		// if its empty, show all the items
+		if($searchTerm.trim() === ""){
+			filteredVaultItems = vaultItems;
+			return;
+		}
+
+		// set to lowercase and trim
+		const term = $searchTerm.toLowerCase().trim();
+
+		// filter and assign the items
+		filteredVaultItems = vaultItems.filter(item=>{
+			return item.name.toLowerCase().includes(term) || // if name has the term
+					(item.tag && item.tag.toLowerCase().includes(term)) // if tag exists and tag has the term
+		})
+	})
+
 </script>
 
-<ItemsPanel title="Vault">
+<ItemsPanel bind:searchTerm={$searchTerm} title="Vault">
 	<!-- Add button -->
 	<button slot="action-component" class="btn-add bounce-effect"> Add New </button>
 
 	<!-- Scrollable content -->
-	{#each vaultItems as { name, url, id, tag } (id)}
+	{#each filteredVaultItems as { name, url, id, tag } (id)}
 		<button
 			class="vault-item"
 			class:active={$page.params.id === id}
