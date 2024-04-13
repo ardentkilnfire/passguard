@@ -31,7 +31,7 @@
 
 	<!-- Profile Button -->
 	<button
-	on:mousedown={() => goto(Routes.APP_PROFILE)}
+		on:mousedown={() => goto(Routes.APP_PROFILE)}
 		class="nav-item profile-btn bounce-effect {containsPath($page.route.id, Routes.APP_PROFILE)
 			? 'active'
 			: ''}"
@@ -42,7 +42,7 @@
 
 	<!-- Settings Button -->
 	<button
-	on:mousedown={() => goto(Routes.APP_SETTINGS)}
+		on:mousedown={() => goto(Routes.APP_SETTINGS)}
 		class="nav-item bounce-effect {containsPath($page.route.id, Routes.APP_SETTINGS)
 			? 'active'
 			: ''}"

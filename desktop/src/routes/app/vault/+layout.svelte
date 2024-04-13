@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { Routes } from '$lib/config';
+	import { page } from '$app/stores';
 	import ItemsPanel from '$components/layout/ItemsPanel.svelte';
+	import { Routes } from '$lib/config';
 	import { fetchFaviconFromURL } from '$lib/utils';
 
 	const { vaultItems } = $page.data;

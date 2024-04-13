@@ -7,8 +7,8 @@ export type NavItem = {
 };
 
 export interface VaultItem {
-	id: string
-	name: string
-	url: string
-	tag?: string
+	id: string;
+	name: string;
+	url: string;
+	tag?: string;
 }

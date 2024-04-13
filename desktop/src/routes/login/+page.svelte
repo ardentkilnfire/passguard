@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { invoke } from '@tauri-apps/api/core';
-	import { listen } from '@tauri-apps/api/event';
 	import { goto } from '$app/navigation';
 	import { Routes } from '$lib/config';
+	import { invoke } from '@tauri-apps/api/core';
+	import { listen } from '@tauri-apps/api/event';
 
 	let SECRET_KEY: string;
 
