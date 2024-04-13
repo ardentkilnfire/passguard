@@ -4,17 +4,13 @@
 	import { Routes } from '$lib/config';
 	import ItemsPanel from '$components/layout/ItemsPanel.svelte';
 	import { fetchFaviconFromURL } from '$lib/utils';
-	import {Plus} from 'phosphor-svelte';
 
 	const { vaultItems } = $page.data;
 </script>
 
 <ItemsPanel title="Vault">
-
 	<!-- Add button -->
-	<button slot="action-component" class="btn-add bounce-effect">
-		<Plus size="20" />
-	</button>
+	<button slot="action-component" class="btn-add bounce-effect"> Add New </button>
 
 	<!-- Scrollable content -->
 	{#each vaultItems as { name, url, id, tag } (id)}
@@ -43,16 +39,18 @@
 <slot />
 
 <style>
+	.btn-add,
+	.vault-item .container > .tag {
+		padding: var(--spacing-4) var(--spacing-8);
+		border-radius: var(--rounded-4);
+	}
 
 	.btn-add {
-		border: 2px solid var(--primary);
-		color: var(--primary);
-		border-radius: var(--rounded-4);
-		height: 2.4rem;
-		width: 2.4rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		background-color: var(--primary);
+		color: var(--bg);
+		font-size: var(--font-12);
+		font-weight: 800;
+		max-height: 2.4rem;
 	}
 
 	.vault-item {
@@ -67,7 +65,8 @@
 		border-radius: var(--rounded-8);
 	}
 
-	.flex-column {
+	.flex-column,
+	.url {
 		width: 100%;
 	}
 
@@ -78,15 +77,12 @@
 	}
 
 	.vault-item .container > .tag {
-		padding: var(--spacing-4) var(--spacing-8);
 		font-size: 10px;
-		border-radius: var(--rounded-4);
 		font-family: var(--font-mono);
 		background-color: rgba(0, 255, 0, 0.25);
 	}
 
 	.url {
-		width: 100%;
 		text-align: left;
 		font-size: var(--font-12);
 		color: var(--primary);
