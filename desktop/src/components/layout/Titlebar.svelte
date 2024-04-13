@@ -79,16 +79,16 @@
 	}
 
 	.btn-minimize {
-		background-color: #71e398;
+		background-color: hsl(141, 67%, 67%);
 		pointer-events: all;
 	}
 
 	.btn-maximize {
-		background-color: #505f63;
+		background-color: hsl(193, 11%, 35%);
 	}
 
 	.btn-close {
-		background-color: #ff7676;
+		background-color: hsl(0, 100%, 73%);
 		pointer-events: all;
 	}
 </style>

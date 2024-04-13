@@ -69,7 +69,7 @@
 		width: var(--sidebar-size);
 		border-right: 1px solid var(--border);
 		flex-shrink: 0;
-		background-color: rgba(255, 255, 255, 0.05);
+		background-color: var(--bg-surface-2);
 		align-items: center;
 		padding: var(--spacing-24) var(--spacing-16);
 		gap: var(--spacing-16);
@@ -95,7 +95,7 @@
 	}
 
 	.nav-item:hover {
-		background-color: rgba(0, 0, 0, 0.25);
+		background-color: hsla(0, 0%, 0%, 0.25);
 		filter: brightness(0.75);
 	}
 
@@ -103,7 +103,7 @@
 		filter: none;
 		color: var(--primary);
 		border: 2px solid var(--primary);
-		background-color: rgba(var(--primary-rgb), 0.25);
+		background-color: hsl(var(--primary-hsl), 0.25);
 	}
 
 	.spacer {
