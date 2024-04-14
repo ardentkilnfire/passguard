@@ -4,7 +4,7 @@
 	import { invoke } from '@tauri-apps/api/core';
 	import { listen } from '@tauri-apps/api/event';
 
-	let SECRET_KEY: string;
+	let SECRET_KEY: string = "01$a06*";
 
 	async function verifyKeyWithBackend(key: string) {
 		try {
