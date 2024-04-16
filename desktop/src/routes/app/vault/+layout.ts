@@ -1,6 +1,8 @@
 import type { VaultItem } from '$lib/types';
 import { v4 as v4uuid } from 'uuid';
 
+//  TODO: Implement Actual system to fetch and store data via backend
+
 export function load() {
 	const items = [
 		{ name: 'Discord', url: 'https://discord.com/app', tag: 'Social Media' },

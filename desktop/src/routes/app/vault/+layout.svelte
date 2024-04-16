@@ -4,6 +4,7 @@
 	import ItemsPanel from '$components/layout/ItemsPanel.svelte';
 	import { Routes } from '$lib/config';
 	import { fetchFaviconFromURL } from '$lib/utils';
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { PageData } from './$types';
 
@@ -11,26 +12,28 @@
 
 	let filteredVaultItems = vaultItems;
 
-	let searchTerm = writable("");
+	let searchTerm = writable('');
 
 	// when search term changes
-	searchTerm.subscribe(()=>{
-		// if its empty, show all the items
-		if($searchTerm.trim() === ""){
+	let unsubscribe = searchTerm.subscribe((value) => {
+		if (value.trim() === '') {
 			filteredVaultItems = vaultItems;
 			return;
 		}
 
-		// set to lowercase and trim
-		const term = $searchTerm.toLowerCase().trim();
+		const term = value.toLowerCase().trim();
 
 		// filter and assign the items
-		filteredVaultItems = vaultItems.filter(item=>{
-			return item.name.toLowerCase().includes(term) || // if name has the term
-					(item.tag && item.tag.toLowerCase().includes(term)) // if tag exists and tag has the term
-		})
-	})
+		filteredVaultItems = vaultItems.filter(
+			(item) =>
+				// if name has the term
+				item.name.toLowerCase().includes(term) ||
+				// if tag exists and tag has the term
+				item.tag?.toLowerCase().includes(term)
+		);
+	});
 
+	onDestroy(unsubscribe);
 </script>
 
 <ItemsPanel bind:searchTerm={$searchTerm} title="Vault">
@@ -50,6 +53,9 @@
 				<!-- Title container -->
 				<div class="container">
 					<span class="name">{name}</span>
+
+					<!-- TODO: Implement Better UI & system for tags -->
+
 					{#if tag}
 						<span data-tag={tag} class="tag">{tag}</span>
 					{/if}
