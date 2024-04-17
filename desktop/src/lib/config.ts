@@ -9,5 +9,6 @@ export const Routes = {
 	APP_FAVORITES: '/app/favorites',
 	APP_TRASH: '/app/trash',
 	APP_PROFILE: '/app/profile',
-	APP_SETTINGS: '/app/settings'
+	APP_SETTINGS: '/app/settings',
+	APP_SETTINGS_COLORS: '/app/settings/colors'
 };
