@@ -111,7 +111,7 @@
 	}
 
 	.btn-add {
-		background-color: var(--primary);
+		background-color: var(--primary-hsl);
 		color: var(--bg);
 		padding: var(--spacing-4) var(--spacing-8);
 		border-radius: var(--rounded-4);

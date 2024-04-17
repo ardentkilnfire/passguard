@@ -101,9 +101,9 @@
 
 	.nav-item.active {
 		filter: none;
-		color: var(--primary);
-		border: 2px solid var(--primary);
-		background-color: hsl(var(--primary-hsl), 0.25);
+		color: var(--primary-hsl);
+		border: 2px solid var(--primary-hsl);
+		background-color: hsla(var(--primary), 0.25);
 	}
 
 	.spacer {

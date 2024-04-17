@@ -18,7 +18,7 @@
 
 <style>
 	button {
-		background-color: var(--primary);
+		background-color: var(--primary-hsl);
 		padding: var(--spacing-8) var(--spacing-16);
 		border-radius: var(--rounded-4);
 		position: absolute;

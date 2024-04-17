@@ -4,7 +4,7 @@
 	import { invoke } from '@tauri-apps/api/core';
 	import { listen } from '@tauri-apps/api/event';
 
-	let SECRET_KEY: string = "01$a06*";
+	let SECRET_KEY: string = '01$a06*';
 
 	async function verifyKeyWithBackend(key: string) {
 		try {
@@ -74,7 +74,7 @@
 	}
 
 	.container > button {
-		background-color: var(--primary);
+		background-color: var(--primary-hsl);
 		color: var(--bg);
 		padding: var(--spacing-8) 0;
 		border-radius: var(--rounded-4);

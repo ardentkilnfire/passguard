@@ -4,8 +4,8 @@ html[data-theme='dark'] {
 	--bg-surface-2: hsla(235, 31%, 59%, 0.2);
 	--bg-titlebar: hsl(218, 35%, 6%);
 
-	--primary: hsl(194, 88%, 60%);
-	--primary-hsl: 194, 88%, 60%;
+	--primary: 194, 88%, 60%;
+	--primary-hsl: hsl(var(--primary));
 
 	--destructive: 0, 74%, 42%;
 	--destructive-hsl: hsl(var(--destructive));

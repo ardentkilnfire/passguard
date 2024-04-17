@@ -77,7 +77,7 @@
 	}
 
 	.btn-add {
-		background-color: var(--primary);
+		background-color: var(--primary-hsl);
 		color: var(--bg);
 		font-size: var(--font-12);
 		font-weight: 800;
@@ -116,7 +116,7 @@
 	.url {
 		text-align: left;
 		font-size: var(--font-12);
-		color: var(--primary);
+		color: var(--primary-hsl);
 	}
 
 	.vault-item.active {
