@@ -7,6 +7,12 @@ html[data-theme='dark'] {
 	--primary: hsl(194, 88%, 60%);
 	--primary-hsl: 194, 88%, 60%;
 
+	--destructive: 0, 74%, 42%;
+	--destructive-hsl: hsl(var(--destructive));
+
+	--success: 85, 85%, 35%;
+	--success-hsl: hsl(var(--success));
+
 	--border: hsl(212, 9%, 30%);
 
 	/* Scrollbar */
