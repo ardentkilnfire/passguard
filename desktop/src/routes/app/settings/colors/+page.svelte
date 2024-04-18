@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Color } from '$lib/types/colors';
-	import { Check, TrashSimple } from 'phosphor-svelte';
+	import { Check, PencilSimple, TrashSimple } from 'phosphor-svelte';
 
 	// TODO: implement logic to fetch colors from database (may be in +layout.ts load function)
-	// TODO: implement edit feature
 
 	// Temporary data
 	let colors: Color[] = [
@@ -17,6 +16,14 @@
 		}
 	];
 
+	let editMap: Record<
+		string,
+		{
+			label: string;
+			color: string;
+		}
+	> = {};
+
 	// controlled by "Add" button
 	let addMode = false;
 
@@ -24,7 +31,7 @@
 	let labelInput = '';
 
 	// bound to color picker's input when in "add mode"
-	let selectedColorInAddMode: string = '#ffffff';
+	let selectedColorInAddMode: string = '#FFFFFF';
 
 	// toggle "add mode"
 	function toggleAdd() {
@@ -37,6 +44,34 @@
 
 	function handleAdd() {
 		// TODO: handle logic and backend calls
+	}
+
+	function enableEditMode(label: string) {
+		// get item
+		const colorItem = colors.find((color) => color.label === label)!;
+
+		// initialize the map in editMap with current values as defaults
+		editMap[label] = {
+			label: colorItem.label,
+			color: colorItem.value
+		};
+	}
+
+	function saveEditedItem(label: string) {
+		// set data in actual `colors` array
+		colors = colors.map((color) => {
+			if (color.label === label) {
+				color = {
+					label: editMap[label].label,
+					value: editMap[label].color
+				};
+			}
+			return color;
+		});
+		// disable edit mode
+		delete editMap[label];
+		// simple hack to force re-render the ui
+		editMap = editMap;
 	}
 </script>
 
@@ -61,7 +96,15 @@
 					<div class="color-input">
 						<span>Color</span>
 						<div class="input-wrapper">
-							<input type="color" bind:value={selectedColorInAddMode} />
+							<!-- color picker -->
+							<div class="color-picker-wrapper">
+								<div
+									class="color-wrapper editable"
+									style="--color-value: {selectedColorInAddMode};"
+								>
+									<input bind:value={selectedColorInAddMode} type="color" />
+								</div>
+							</div>
 							<input type="text" bind:value={selectedColorInAddMode} />
 						</div>
 					</div>
@@ -78,11 +121,37 @@
 
 	<div class="flex-column color-items-container">
 		{#each colors as { label, value } (label)}
-			<div style="--color-value: {value};" class="color-item">
-				<!-- color preview -->
-				<div class="preview"></div>
+			{@const isEditing = Object.keys(editMap).includes(label)}
+			<div style="--color-value: {isEditing ? editMap[label].color : value};" class="color-item">
+				<div class="color-wrapper" class:editable={isEditing}>
+					{#if isEditing}
+						<input bind:value={editMap[label].color} type="color" />
+					{/if}
+				</div>
+
 				<div class="label">
-					{label}
+					{#if isEditing}
+						<div>
+							<input
+								on:keyup={(e) => e.code === 'Enter' && saveEditedItem(label)}
+								bind:value={editMap[label].label}
+							/>
+						</div>
+					{:else}
+						<span>
+							{label}
+						</span>
+					{/if}
+
+					{#if isEditing}
+						<button on:click={() => saveEditedItem(label)} class="save-btn">
+							<Check size={20} />
+						</button>
+					{:else}
+						<button on:click={() => enableEditMode(label)} class="edit-btn">
+							<PencilSimple size={20} />
+						</button>
+					{/if}
 				</div>
 				<div class="actions">
 					<button class="btn-action destructive" on:click={() => deleteItem(label)}
@@ -125,22 +194,33 @@
 
 	.color-items-container .color-item {
 		display: flex;
-		align-items: end;
+		align-items: center;
 		width: 100%;
 		padding: var(--spacing-16) var(--spacing-8);
 		border-bottom: 0.5px solid var(--border);
 		gap: var(--spacing-16);
 
-		.preview {
-			width: 1.5em;
-			height: 1.5em;
-			background-color: var(--color-value);
-			border-radius: var(--rounded-full);
+		.color-wrapper {
+			width: 25px;
 		}
 
 		.label {
 			flex-grow: 1;
 			font-weight: 600;
+			display: flex;
+			align-items: center;
+			gap: var(--spacing-4);
+
+			.edit-btn {
+				display: none;
+			}
+
+			.save-btn {
+			}
+		}
+
+		&:hover > .label > .edit-btn {
+			display: block;
 		}
 	}
 
@@ -189,22 +269,20 @@
 			}
 
 			.color-input {
+				display: flex;
+				flex-direction: column;
+				gap: var(--spacing-4);
+
 				.input-wrapper {
 					display: flex;
-					gap: var(--spacing-4);
-					width: fit-content;
+					gap: var(--spacing-8);
 
-					// Styling color picker
-					input[type='color'] {
-						width: 3em;
-						height: 3em;
-						border: none;
-						overflow: hidden;
-						padding: var(--spacing-4);
+					.color-picker-wrapper {
+						display: grid;
+						place-items: center;
 
-						&::-webkit-color-swatch {
-							border: none;
-							border-radius: var(--rounded-full);
+						.color-wrapper {
+							width: 25px;
 						}
 					}
 
@@ -241,5 +319,26 @@
 	input::placeholder {
 		font-weight: 600;
 		color: rgba(149, 167, 177, 0.5);
+	}
+
+	.color-wrapper {
+		background-color: var(--color-value);
+		border-radius: var(--rounded-full);
+		position: relative;
+		overflow: hidden;
+		aspect-ratio: 1 / 1;
+
+		input[type='color'] {
+			opacity: 0;
+			z-index: -100;
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		&.editable input[type='color'] {
+			z-index: 1;
+		}
 	}
 </style>
