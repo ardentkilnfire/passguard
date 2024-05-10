@@ -4,6 +4,13 @@
 	import { onMount } from 'svelte';
 
 	let appName = '';
+	let window = webviewWindow.getCurrent();
+
+	async function toggleMaximize() {
+		try {
+			(await window.isMaximized()) ? window.unmaximize() : window.maximize();
+		} catch (error) {}
+	}
 
 	onMount(async () => {
 		appName = await getName();
@@ -19,13 +26,9 @@
 
 	<!-- App Controls -->
 	<div class="controls">
-		<button
-			on:click={webviewWindow.getCurrent().minimize}
-			class="btn-minimize"
-			aria-label="Minimize"
-		/>
-		<button class="btn-maximize" disabled />
-		<button on:click={webviewWindow.getCurrent().close} class="btn-close" aria-label="Close" />
+		<button on:click={window.minimize} class="btn-minimize" aria-label="Minimize" />
+		<button on:click={toggleMaximize} class="btn-maximize" aria-label="Maximize" />
+		<button on:click={window.close} class="btn-close" aria-label="Close" />
 	</div>
 </div>
 
@@ -72,6 +75,7 @@
 		width: 1.2rem;
 		height: 1.2rem;
 		cursor: default;
+		pointer-events: all;
 	}
 
 	.controls > button:hover {
@@ -79,16 +83,14 @@
 	}
 
 	.btn-minimize {
-		background-color: hsl(141, 67%, 67%);
-		pointer-events: all;
+		background-color: hsl(59, 77%, 68%);
 	}
 
 	.btn-maximize {
-		background-color: hsl(193, 11%, 35%);
+		background-color: hsl(141, 67%, 67%);
 	}
 
 	.btn-close {
 		background-color: hsl(0, 100%, 73%);
-		pointer-events: all;
 	}
 </style>
