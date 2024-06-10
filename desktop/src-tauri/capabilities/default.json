@@ -9,6 +9,8 @@
     "window:default",
     "window:allow-start-dragging",
     "window:allow-minimize",
+    "window:allow-maximize",
+    "window:allow-unmaximize",
     "window:allow-close",
     "webview:default",
     "app:default",

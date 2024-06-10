@@ -8,12 +8,11 @@
       {
         "fullscreen": false,
         "height": 720,
-        "resizable": false,
+        "resizable": true,
         "title": "PassGuard",
         "width": 860,
         "shadow": true,
         "decorations": false,
-        "maximizable": false,
         "center": true
       }
     ]
