@@ -1,8 +1,3 @@
-> [!NOTE]  
-> Waiting for the Svelte 5 stable release!
-
----
-
 <p align="center">
   <img src="app-icon.png" alt="passguard-logo" />
 </p>
